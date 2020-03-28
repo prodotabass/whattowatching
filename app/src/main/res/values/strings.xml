@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">What to watch</string>
+    <string name="upper_text">Фильмов к просмотру: </string>
+    <string name="add_film">Добавить фильм</string>
+    <string name="remove_film">Очистить таблицу</string>
+    <string name="sort_films">Сортировать</string>
+</resources>
