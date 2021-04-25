@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-
+//TODO: когда запустил первый раз, судорожно пытался нажать на "поиск", а оказывается там поле рядом, зачем? Лучше сделать одной строкой.
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-
+//TODO: зачем в коде было сделано автодобавление? Это было не удобно, сделать лучше через hint
             <EditText
                 android:id="@+id/setFilm"
                 android:layout_width="match_parent"
@@ -120,7 +120,7 @@
             android:background="@color/remove_film"
             android:onClick="clear"
             android:text="@string/remove_film" />
-
+//TODO: удалим кнопку, т.к. лучше сделать сортировку через обозначения
         <Button
             android:layout_width="match_parent"
             android:layout_height="match_parent"
