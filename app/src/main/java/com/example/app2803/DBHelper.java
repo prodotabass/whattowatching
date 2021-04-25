@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DBHelper extends SQLiteOpenHelper {
     final static String DB_NAME = "films.db";
     final static String TABLE_NAME = "filmlist";
+    //TODO: Не применяется, нужно удалять
     final static String DROP = "DROP TABLE " + TABLE_NAME;
     final static String CREATE = "CREATE TABLE " + TABLE_NAME + "( `_id` INTEGER PRIMARY KEY AUTOINCREMENT, `title` TEXT NOT NULL, `director` TEXT NOT NULL, `genre` TEXT NOT NULL, `year` INTEGER NOT NULL, `duration` INTEGER NOT NULL )";
     // при изменении структуры БД меняется и версия
