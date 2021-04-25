@@ -14,10 +14,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -77,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         DBHelper helper = new DBHelper(this);
         db = helper.getWritableDatabase();
 
-        setDefaulText();
+
         tunes = db.rawQuery("SELECT * FROM filmlist", null);
         count = tunes.getCount();
         setFilmCounter(findThisFilm);
@@ -99,10 +97,11 @@ public class MainActivity extends AppCompatActivity {
         list.add(setDuration.getText());
         Object[] array = list.toArray();
 
+
         db.execSQL("INSERT INTO filmlist (title, director, genre, year, duration) values (?,?,?,?,?)", array);
         count = count + 1;
         setFilmCounter(findThisFilm);
-        setDefaulText();
+
         query();
 
 
@@ -116,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
 
         adapter.changeCursor(db.rawQuery("SELECT * FROM filmlist ORDER BY title", null));
         count = 0;
+
         setFilmCounter(findThisFilm);
     }
 
@@ -125,23 +125,33 @@ public class MainActivity extends AppCompatActivity {
         durationCount.moveToFirst();
         filmCounter.setText("Фильмов к просмотру:" + " " + Integer.toString(count) + ", " + Integer.toString(durationCount.getInt(0)) + " минут");
     }
-//TODO: Зачем делать автодобавление текста, который потом еще нужно стирать. Проще сделать hint в этих областях
-    public void setDefaulText() {
-        setFilm.setText("Название");
-        setDirector.setText("Режиссер");
-        setDuration.setText("Длина");
-        setYear.setText("Год");
-        setGenre.setText("Жанр");
-    }
-//TODO: Тут можно сделать лучше сортировку, по жанрам, году и пр. параметрам.
-    public void onClickSort(View view) {
 
-        adapter.changeCursor(db.rawQuery("SELECT * FROM filmlist ORDER BY " + playlistFields[fieldCount], null));
-        fieldCount++;
-        if (fieldCount == playlistFields.length) fieldCount = 1;
 
-        findFilm.setText("");
+
+
+    public void orderBy(View v) {
+        switch (v.getId()) {
+            case R.id.id:
+                adapter.changeCursor(db.rawQuery("SELECT * FROM filmlist ORDER BY _id", null));
+                break;
+            case R.id.titlename:
+                adapter.changeCursor(db.rawQuery("SELECT * FROM filmlist ORDER BY title", null));
+                break;
+            case R.id.directorname:
+                adapter.changeCursor(db.rawQuery("SELECT * FROM filmlist ORDER BY director", null));
+                break;
+            case R.id.genrename:
+                adapter.changeCursor(db.rawQuery("SELECT * FROM filmlist ORDER BY genre", null));
+                break;
+            case R.id.yearname:
+                adapter.changeCursor(db.rawQuery("SELECT * FROM filmlist ORDER BY year", null));
+                break;
+            case R.id.durationname:
+                adapter.changeCursor(db.rawQuery("SELECT * FROM filmlist ORDER BY duration", null));
+                break;
+        }
     }
+
 
     public void query() {
         onChangeTunes = db.rawQuery("SELECT * FROM filmlist WHERE TITLE LIKE " + "'%" + findThisFilm + "%'", null);
