@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
         durationCount.moveToFirst();
         filmCounter.setText("Фильмов к просмотру:" + " " + Integer.toString(count) + ", " + Integer.toString(durationCount.getInt(0)) + " минут");
     }
-
+//TODO: Зачем делать автодобавление текста, который потом еще нужно стирать. Проще сделать hint в этих областях
     public void setDefaulText() {
         setFilm.setText("Название");
         setDirector.setText("Режиссер");
@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
         setYear.setText("Год");
         setGenre.setText("Жанр");
     }
-
+//TODO: Тут можно сделать лучше сортировку, по жанрам, году и пр. параметрам.
     public void onClickSort(View view) {
 
         adapter.changeCursor(db.rawQuery("SELECT * FROM filmlist ORDER BY " + playlistFields[fieldCount], null));
